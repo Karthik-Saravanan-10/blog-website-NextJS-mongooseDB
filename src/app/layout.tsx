@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/footer/Footer";
+import Sessionprovider from "@/components/SessionProvider";
 
 export const metadata: Metadata = {
   title: "Blog App",
@@ -10,15 +11,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  session,
 }: Readonly<{
   children: React.ReactNode;
+  session: any;
 }>) {
   return (
     <html lang="en">
       <body>
-        <Navbar />
-        {children}
-        <Footer />
+        <Sessionprovider session={session}>
+          <Navbar />
+          {children}
+          <Footer />
+        </Sessionprovider>
       </body>
     </html>
   );

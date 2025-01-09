@@ -4,22 +4,10 @@ import bcrypt from 'bcryptjs'
 
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
-    try {
-        await db.connect()
-        const isPresent = await User.find().limit(2).populate("password");
-        if (!isPresent) {
-            throw new Error("Empty")
-        }
-        return new NextResponse(JSON.stringify(isPresent), { status: 200 })
-    } catch (error: any) {
-        return new NextResponse(JSON.stringify(error.message), { status: 500 })
-    }
-}
-
 export async function POST(req: NextRequest) {
     try {
         const { username, email, password: pass } = await req.json()
+        //console.log(await req.json())
         await db.connect()
         const isPresent = await User.findOne({ email });
         if (isPresent) {

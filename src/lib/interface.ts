@@ -6,3 +6,7 @@ export interface Blogs {
     img: string|StaticImageData,
     authorId: string,
 }
+
+export interface JwtPayload {
+    id: string;
+}
